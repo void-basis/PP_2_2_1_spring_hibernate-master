@@ -6,9 +6,7 @@ import javax.persistence.*;
 @Table(name = "car")
 public class Car {
 
-    @OneToOne(fetch = FetchType.LAZY)   //(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "id")
+    @OneToOne(mappedBy = "car")
     private User user;
 
     @Column(name = "model")
@@ -18,6 +16,7 @@ public class Car {
     private int series;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public Car() {
@@ -28,13 +27,13 @@ public class Car {
         this.series = series;
     }
 
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getModel() {
         return model;
